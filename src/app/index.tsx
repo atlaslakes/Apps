@@ -35,7 +35,7 @@ export default function HomeScreen() {
         <ThemedView style={styles.heroSection}>
           <AnimatedIcon />
           <ThemedText type="title" style={styles.title}>
-            Hello World
+             Welcome to Atlas Lakes here we will be having our apps
           </ThemedText>
         </ThemedView>
 
