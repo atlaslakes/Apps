@@ -10,7 +10,6 @@
     "ios": {
       "icon": "./assets/expo.icon",
       "bundleIdentifier": "com.atlaslakes.myapp",
-      "buildNumber": "3",
       "infoPlist": {
         "ITSAppUsesNonExemptEncryption": false
       }
