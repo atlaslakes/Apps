@@ -1,51 +1,28 @@
-# Learn more https://docs.github.com/en/get-started/getting-started-with-git/ignoring-files
+# Repo-level ignores. Each app under its own folder has its own .gitignore.
 
 # dependencies
 node_modules/
 
-# Expo
-.expo/
-dist/
-web-build/
-expo-env.d.ts
+# editor / OS
+.DS_Store
+*.pem
 
-# Native
-.kotlin/
-*.orig.*
-*.jks
+# credentials (never commit)
 *.p8
 *.p12
 *.key
+*.jks
 *.mobileprovision
-
-# Metro
-.metro-health-check*
-
-# debug
-npm-debug.*
-yarn-debug.*
-yarn-error.*
-
-# macOS
-.DS_Store
-*.pem
+google-service-account.json
 
 # local env files
 .env*.local
 
-# EAS / store credentials
-google-service-account.json
-
-# typescript
-*.tsbuildinfo
-
-example
-
-# generated native folders
-/ios
-/android
-busy-boys/ios
-busy-boys/android
-
-# expo dev server log
+# expo / metro noise (any depth)
+.expo/
+dist/
+web-build/
+.metro-health-check*
 .expo-devserver.log
+expo-env.d.ts
+*.tsbuildinfo
