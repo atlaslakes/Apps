@@ -44,3 +44,8 @@ example
 # generated native folders
 /ios
 /android
+busy-boys/ios
+busy-boys/android
+
+# expo dev server log
+.expo-devserver.log

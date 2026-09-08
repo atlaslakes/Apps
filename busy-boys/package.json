@@ -1,5 +1,5 @@
 {
-  "name": "karavan-staff",
+  "name": "busy-boys",
   "main": "expo-router/entry",
   "version": "1.0.0",
   "dependencies": {
@@ -31,23 +31,15 @@
   },
   "devDependencies": {
     "@types/react": "~19.2.2",
-    "cross-env": "^10.1.0",
-    "eas-cli": "^23.2.0",
     "typescript": "~6.0.3"
   },
   "scripts": {
     "start": "expo start",
-    "start:staff": "cross-env APP_VARIANT=staff expo start",
-    "start:buyer": "cross-env APP_VARIANT=buyer expo start",
     "reset-project": "node ./scripts/reset-project.js",
     "android": "expo start --android",
     "ios": "expo start --ios",
     "web": "expo start --web",
-    "lint": "expo lint",
-    "build:staff": "eas build --platform ios --profile staff",
-    "build:buyer": "eas build --platform ios --profile buyer",
-    "submit:staff": "eas submit --platform ios --profile staff",
-    "submit:buyer": "eas submit --platform ios --profile buyer"
+    "lint": "expo lint"
   },
   "private": true
 }
