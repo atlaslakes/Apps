@@ -1,0 +1,39 @@
+{
+  "cli": {
+    "version": ">= 16.0.0",
+    "appVersionSource": "remote"
+  },
+  "build": {
+    "development": {
+      "developmentClient": true,
+      "distribution": "internal"
+    },
+    "preview": {
+      "distribution": "internal",
+      "autoIncrement": true
+    },
+    "production": {
+      "autoIncrement": true
+    }
+  },
+  "submit": {
+    "preview": {
+      "android": {
+        "serviceAccountKeyPath": "./google-service-account.json",
+        "track": "internal"
+      }
+    },
+    "production": {
+      "ios": {
+        "companyName": "Atlas Lakes Holdings LLC",
+        "ascApiKeyPath": "./asc-api-key.p8",
+        "ascApiKeyId": "659NG5Y4M4",
+        "ascApiKeyIssuerId": "e00adc87-33ee-47fd-aa42-1db720da31a4"
+      },
+      "android": {
+        "serviceAccountKeyPath": "./google-service-account.json",
+        "track": "internal"
+      }
+    }
+  }
+}

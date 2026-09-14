@@ -24,14 +24,37 @@ npm run submit:staff       # eas submit --platform ios --profile staff
 
 `build/karavan-portal/` holds the committed static web export of the portal variant.
 
-### `busy boys apps/`
-Separate Expo project (`com.atlaslakes.busyboys`).
+### `busy-boys-apps/`
+Separate Expo project (`com.atlaslakes.busyboys`). Wraps `busyboys.com` in a native WebView.
 
 ```bash
-cd "busy boys apps"
+cd busy-boys-apps
 npm install
 npm start
 ```
+
+### `eat-mashawi-apps/`
+Separate Expo project (`com.atlaslakes.eatmashawi`), test app wrapping `eatmashawi.com` in a native WebView.
+
+```bash
+cd eat-mashawi-apps
+npm install
+npm start
+```
+
+### `pangea-market-apps/`
+Separate Expo project (`com.atlaslakes.pangeamarket`), test app wrapping `pangeamarket.com` in a native WebView.
+
+```bash
+cd pangea-market-apps
+npm install
+npm start
+```
+
+> Note: app folder names must not contain spaces — EAS's remote iOS build path breaks on a
+> space in the project folder name (see `busy-boys-apps` git history for the fix). `karavan
+> imports apps/` still has a space and hasn't been rebuilt since the folder restructure; rename
+> it the same way before its next iOS build.
 
 ## Deployment
 
