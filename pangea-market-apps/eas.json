@@ -26,6 +26,7 @@
     "production": {
       "ios": {
         "companyName": "Atlas Lakes Holdings LLC",
+        "ascAppId": "6811970995",
         "ascApiKeyPath": "./asc-api-key.p8",
         "ascApiKeyId": "659NG5Y4M4",
         "ascApiKeyIssuerId": "e00adc87-33ee-47fd-aa42-1db720da31a4"
