@@ -6,7 +6,7 @@ independently (no npm workspaces).
 
 ## Apps
 
-### `karavan imports apps/`
+### `karavan-imports-apps/`
 Single Expo project that ships as **two variants** via `APP_VARIANT` (see `app.config.js`):
 
 | Variant | Name | Bundle ID | ASC Apple ID | Portal URL |
@@ -15,7 +15,7 @@ Single Expo project that ships as **two variants** via `APP_VARIANT` (see `app.c
 | `buyer` | Karavan Portal | `com.atlaslakes.buyer` | 6809906648 | `karavanimports.com` |
 
 ```bash
-cd "karavan imports apps"
+cd karavan-imports-apps
 npm install
 npm run start:staff        # or start:buyer
 npm run build:staff        # eas build --platform ios --profile staff
@@ -52,9 +52,8 @@ npm start
 ```
 
 > Note: app folder names must not contain spaces — EAS's remote iOS build path breaks on a
-> space in the project folder name (see `busy-boys-apps` git history for the fix). `karavan
-> imports apps/` still has a space and hasn't been rebuilt since the folder restructure; rename
-> it the same way before its next iOS build.
+> space in the project folder name (see `busy-boys-apps` and `karavan-imports-apps` git history
+> for the fix).
 
 ## Deployment
 
