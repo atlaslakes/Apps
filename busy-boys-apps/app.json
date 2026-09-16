@@ -47,10 +47,10 @@
     "extra": {
       "router": {},
       "eas": {
-        "projectId": "d4631234-5066-48b7-9eb7-88ed5cc3f08e"
+        "projectId": "a30858c2-04b1-4cb3-a126-d6a7db73220b"
       }
     },
-    "owner": "atlas-lakes-holdings",
+    "owner": "atlaslakes",
     "runtimeVersion": {
       "policy": "appVersion"
     }
