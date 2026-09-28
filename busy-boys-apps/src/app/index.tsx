@@ -23,6 +23,26 @@ function isBusyBoysHost(hostname: string | null) {
   return hostname === 'busyboys.com' || hostname === 'www.busyboys.com';
 }
 
+// Hosts involved in sign in / sign up only. app.base44.com is this site's
+// underlying auth platform (e.g. app.base44.com/api/apps/auth/apple/login),
+// which then same-frame-redirects to the actual provider for Google/Apple.
+// None of this is an intentional escape like the Toast/DoorDash/UberEats/rewards
+// ordering links (those stay external, untouched) — keeping these in the WebView
+// lets sign in/up complete inline instead of popping to the system browser.
+// NOTE: Google generally refuses OAuth inside embedded WebViews
+// ("Error 403: disallowed_useragent"); email and Apple sign-in work inline.
+const AUTH_HOSTS = ['app.base44.com', 'base44.app', 'accounts.google.com', 'appleid.apple.com'];
+
+function isSameFrameAuthHost(hostname: string | null) {
+  if (!hostname) return false;
+  return AUTH_HOSTS.some((host) => hostname === host || hostname.endsWith(`.${host}`));
+}
+
+// Anything that must stay inside the WebView so the session (cookies) is shared.
+function staysInWebView(hostname: string | null) {
+  return isBusyBoysHost(hostname) || isSameFrameAuthHost(hostname);
+}
+
 export default function HomeScreen() {
   const webViewRef = useRef<WebView>(null);
   const [loading, setLoading] = useState(true);
@@ -31,6 +51,11 @@ export default function HomeScreen() {
   const theme = useTheme();
 
   const openExternal = (url: string) => {
+    if (__DEV__) {
+      // If sign-in still pops out to a separate browser, this tells you which
+      // host did it — add that host to AUTH_HOSTS.
+      console.log('[WebView] opening externally:', url);
+    }
     // Reload once the in-app browser is dismissed — busyboys.com can be left with
     // an order-platform picker modal still open from before the user left, and
     // there's no in-app affordance to close that (it's not real navigation
@@ -66,27 +91,43 @@ export default function HomeScreen() {
           setCanGoBack(navState.canGoBack);
         }}
         allowsBackForwardNavigationGestures
+        // Persist login cookies (busyboys.com + base44.app) across app launches.
+        sharedCookiesEnabled
+        thirdPartyCookiesEnabled
         onOpenWindow={(event) => {
           // busyboys.com deliberately escapes to a system/in-app browser for ordering
           // links (Toast, DoorDash, UberEats) rather than navigating the embedded
           // WebView — those checkout flows often refuse to work when embedded.
+          // But a new-window link to busyboys.com itself (e.g. a Sign in button
+          // with target="_blank") or to the auth hosts must stay in the WebView,
+          // otherwise sign-in happens in a separate browser session.
           const targetUrl = event.nativeEvent.targetUrl;
-          if (getHostname(targetUrl)) {
+          const hostname = getHostname(targetUrl);
+          if (!hostname) return;
+          if (staysInWebView(hostname)) {
+            webViewRef.current?.injectJavaScript(`window.location.href = ${JSON.stringify(targetUrl)}; true;`);
+          } else {
             openExternal(targetUrl);
           }
         }}
         onShouldStartLoadWithRequest={(request) => {
+          // On iOS this also fires for iframes (reCAPTCHA, analytics, sign-in
+          // button widgets, payment frames). Those are not navigations — let them
+          // load, or they'd pop the system browser mid sign-in.
+          if (request.isTopFrame === false) {
+            return true;
+          }
           // The site's own escape mechanism sometimes falls back to a same-frame
           // navigation (window.location.href) instead of window.open(), which
           // onOpenWindow above never sees — catch that here too, for any request
           // that isn't busyboys.com itself.
           const { url } = request;
           const hostname = getHostname(url);
-          if (isBusyBoysHost(hostname)) {
+          if (staysInWebView(hostname)) {
             return true;
           }
           if (hostname) {
-            // a real http(s) host other than busyboys.com
+            // a real http(s) host other than busyboys.com / auth
             openExternal(url);
             return false;
           }
