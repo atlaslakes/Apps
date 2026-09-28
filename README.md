@@ -33,6 +33,13 @@ npm install
 npm start
 ```
 
+Navigation rules live in `src/app/index.tsx`:
+- Sign in / sign up (email, Apple, Google via `app.base44.com`, `accounts.google.com`,
+  `appleid.apple.com`) stays inside the WebView so the session shares cookies with the site —
+  escaping to the system browser would put the login in a separate storage context and lose it.
+- Ordering links (Toast, DoorDash, UberEats) and rewards signup still escape to the system/in-app
+  browser, matching the site's own `systemBrowser` behavior for those checkout flows.
+
 ### `eat-mashawi-apps/`
 Separate Expo project (`com.atlaslakes.eatmashawi`), test app wrapping `eatmashawi.com` in a native WebView.
 
