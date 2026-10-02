@@ -10,13 +10,15 @@
     "ios": {
       "icon": "./assets/images/icon.png",
       "bundleIdentifier": "com.atlaslakes.pangeamarket",
+      "buildNumber": "13",
       "infoPlist": {
-        "ITSAppUsesNonExemptEncryption": false
+        "ITSAppUsesNonExemptEncryption": false,
+        "CFBundleName": "Pangea Market"
       }
     },
     "android": {
       "package": "com.atlaslakes.pangeamarket",
-      "versionCode": 1,
+      "versionCode": 5,
       "adaptiveIcon": {
         "backgroundColor": "#FFFFFF",
         "foregroundImage": "./assets/images/android-icon-foreground.png",
@@ -34,9 +36,18 @@
       [
         "expo-splash-screen",
         {
-          "backgroundColor": "#FFFFFF",
-          "image": "./assets/images/splash-icon.png",
-          "imageWidth": 160
+          "backgroundColor": "#FAF4EA",
+          "image": "./assets/images/icon.png",
+          "imageWidth": 220
+        }
+      ],
+      [
+        "expo-build-properties",
+        {
+          "android": {
+            "enableProguardInReleaseBuilds": true,
+            "enableShrinkResourcesInReleaseBuilds": true
+          }
         }
       ]
     ],
@@ -47,10 +58,10 @@
     "extra": {
       "router": {},
       "eas": {
-        "projectId": "b8dcfb83-6ca6-47d6-b68b-2e5f5fefaa08"
+        "projectId": "6e087495-717a-41f4-a7bf-ae73bff7649b"
       }
     },
-    "owner": "atlas-lakes-holdings",
+    "owner": "pangea-market",
     "runtimeVersion": {
       "policy": "appVersion"
     }

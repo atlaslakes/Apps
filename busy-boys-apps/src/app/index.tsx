@@ -25,13 +25,19 @@ function isBusyBoysHost(hostname: string | null) {
 
 // Hosts involved in sign in / sign up only. app.base44.com is this site's
 // underlying auth platform (e.g. app.base44.com/api/apps/auth/apple/login),
-// which then same-frame-redirects to the actual provider for Google/Apple.
-// None of this is an intentional escape like the Toast/DoorDash/UberEats/rewards
-// ordering links (those stay external, untouched) — keeping these in the WebView
-// lets sign in/up complete inline instead of popping to the system browser.
-// NOTE: Google generally refuses OAuth inside embedded WebViews
-// ("Error 403: disallowed_useragent"); email and Apple sign-in work inline.
-const AUTH_HOSTS = ['app.base44.com', 'base44.app', 'accounts.google.com', 'appleid.apple.com'];
+// which then same-frame-redirects to the actual provider. Keeping app.base44.com
+// in the WebView lets email sign-in/up complete inline instead of popping to
+// the system browser, where the resulting session would land in a separate
+// cookie jar the WebView never sees. None of this is an intentional escape
+// like the Toast/DoorDash/UberEats/rewards ordering links (those stay
+// external, untouched).
+// accounts.google.com and appleid.apple.com are deliberately NOT included —
+// both get stuck inside an embedded WebView (Google actively refuses to
+// render there at all; Apple's flow commonly relies on Face ID/Passkey
+// WebAuthn prompts that only work in a real system-browser context) — and
+// letting them escape to the external browser is what actually lets those
+// flows complete, with its "Done" button returning the user to the app.
+const AUTH_HOSTS = ['app.base44.com', 'base44.app'];
 
 function isSameFrameAuthHost(hostname: string | null) {
   if (!hostname) return false;

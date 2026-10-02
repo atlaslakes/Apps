@@ -1,5 +1,3 @@
-# Learn more https://docs.github.com/en/get-started/getting-started-with-git/ignoring-files
-
 # dependencies
 node_modules/
 
@@ -48,6 +46,6 @@ example
 # expo dev server log
 .expo-devserver.log
 
-# large app-review materials — uploaded directly to App Store Connect /
-# Google Play, not meant to live in git history
+# large app-review materials — already uploaded directly to App Store Connect /
+# Google Play, not needed inside the build archive
 assets/app review assets/

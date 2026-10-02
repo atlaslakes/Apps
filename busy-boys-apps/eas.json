@@ -23,6 +23,12 @@
         "track": "internal"
       }
     },
+    "openTesting": {
+      "android": {
+        "serviceAccountKeyPath": "./google-service-account.json",
+        "track": "beta"
+      }
+    },
     "production": {
       "ios": {
         "companyName": "Atlas Lakes Holdings LLC",
@@ -33,7 +39,7 @@
       },
       "android": {
         "serviceAccountKeyPath": "./google-service-account.json",
-        "track": "internal"
+        "track": "production"
       }
     }
   }

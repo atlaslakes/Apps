@@ -28,6 +28,13 @@ export default ({ config }) => ({
   ios: {
     ...config.ios,
     bundleIdentifier: v.bundleIdentifier,
+    infoPlist: {
+      ...config.ios?.infoPlist,
+      // Expo derives CFBundleName from the shared slug ("atlas-lakes-apps") by
+      // default, which shows up wrong in TestFlight instead of the real
+      // per-variant name — override it explicitly per variant.
+      CFBundleName: v.name,
+    },
   },
   android: {
     ...config.android,

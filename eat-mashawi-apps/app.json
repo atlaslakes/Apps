@@ -1,6 +1,6 @@
 {
   "expo": {
-    "name": "Eat Mashawi",
+    "name": "Mashawi Grill",
     "slug": "eat-mashawi",
     "version": "1.0.0",
     "orientation": "portrait",
@@ -11,7 +11,8 @@
       "icon": "./assets/images/icon.png",
       "bundleIdentifier": "com.atlaslakes.eatmashawi",
       "infoPlist": {
-        "ITSAppUsesNonExemptEncryption": false
+        "ITSAppUsesNonExemptEncryption": false,
+        "CFBundleName": "Mashawi Grill"
       }
     },
     "android": {
@@ -35,8 +36,17 @@
         "expo-splash-screen",
         {
           "backgroundColor": "#FFFFFF",
-          "image": "./assets/images/splash-icon.png",
-          "imageWidth": 160
+          "image": "./assets/images/icon.png",
+          "imageWidth": 220
+        }
+      ],
+      [
+        "expo-build-properties",
+        {
+          "android": {
+            "enableProguardInReleaseBuilds": true,
+            "enableShrinkResourcesInReleaseBuilds": true
+          }
         }
       ]
     ],
