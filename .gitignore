@@ -16,6 +16,7 @@ node_modules/
 google-service-account.json
 
 # local env files
+.env
 .env*.local
 
 # expo / metro noise (any depth)
