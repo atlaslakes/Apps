@@ -11,7 +11,7 @@ Single Expo project that ships as **two variants** via `APP_VARIANT` (see `app.c
 
 | Variant | Name | Bundle ID | ASC Apple ID | Portal URL |
 |---|---|---|---|---|
-| `staff` | Karavan Staff | `com.atlaslakes.myapp` | 6801203768 | `karavanimports.com/staff` |
+| `staff` | Karavan Staff | iOS `com.atlaslakes.myapp` / Android `com.atlaslakes.staff` | 6801203768 | `karavanimports.com/staff` |
 | `buyer` | Karavan Portal | `com.atlaslakes.buyer` | 6809906648 | `karavanimports.com` |
 
 ```bash

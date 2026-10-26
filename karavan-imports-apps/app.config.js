@@ -1,5 +1,6 @@
 // Dynamic config: one codebase, two shippable apps.
-//   APP_VARIANT=staff  -> "Karavan Staff", com.atlaslakes.myapp   (existing TestFlight app 6801203768)
+//   APP_VARIANT=staff  -> "Karavan Staff", iOS com.atlaslakes.myapp (existing TestFlight app 6801203768),
+//                         Android com.atlaslakes.staff
 //   APP_VARIANT=buyer  -> "Karavan Portal", com.atlaslakes.buyer  (new TestFlight app)
 // The variant is set per EAS build profile in eas.json, and via the npm scripts for local dev.
 
@@ -9,7 +10,7 @@ const VARIANTS = {
   staff: {
     name: 'Karavan Staff',
     bundleIdentifier: 'com.atlaslakes.myapp',
-    androidPackage: 'com.atlaslakes.myapp',
+    androidPackage: 'com.atlaslakes.staff',
     portalUrl: 'https://karavanimports.com/staff',
   },
   buyer: {
