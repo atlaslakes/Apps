@@ -2,7 +2,7 @@
   "expo": {
     "name": "Karavan Portal",
     "slug": "atlas-lakes-apps",
-    "version": "1.0.0",
+    "version": "1.1.0",
     "orientation": "portrait",
     "icon": "./assets/images/karavan-icon.png",
     "scheme": "myapp",
@@ -45,7 +45,9 @@
             "enableShrinkResourcesInReleaseBuilds": true
           }
         }
-      ]
+      ],
+      "expo-image",
+      "expo-web-browser"
     ],
     "experiments": {
       "typedRoutes": true,

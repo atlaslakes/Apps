@@ -18,6 +18,8 @@ const VARIANTS = {
     bundleIdentifier: 'com.atlaslakes.buyer',
     androidPackage: 'com.atlaslakes.buyer',
     portalUrl: 'https://karavanimports.com',
+    // Signed-in users open straight onto their dashboard on launch.
+    signedInPath: '/dashboard',
   },
 };
 
@@ -45,5 +47,6 @@ export default ({ config }) => ({
     ...config.extra,
     variant: VARIANT,
     portalUrl: v.portalUrl,
+    signedInPath: v.signedInPath,
   },
 });
