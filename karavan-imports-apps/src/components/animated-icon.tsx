@@ -1,3 +1,4 @@
+import Constants from 'expo-constants';
 import { Image } from 'expo-image';
 import * as SplashScreen from 'expo-splash-screen';
 import { useState } from 'react';
@@ -5,9 +6,16 @@ import { StyleSheet, View } from 'react-native';
 import Animated, { Easing, Keyframe } from 'react-native-reanimated';
 import { scheduleOnRN } from 'react-native-worklets';
 
-// Must match the expo-splash-screen plugin config in app.json so the hand-off
-// from the native splash to this overlay is seamless.
-const BRAND_COLOR = '#A43C21';
+// Must match the per-variant expo-splash-screen config in app.config.js so the
+// hand-off from the native splash to this overlay is seamless. Staff uses the
+// brown logo; the Portal (buyer) app uses the white one.
+const IS_PORTAL = Constants.expoConfig?.extra?.variant === 'buyer';
+const BRAND_COLOR =
+  (Constants.expoConfig?.extra?.splashBackground as string | undefined) ??
+  (IS_PORTAL ? '#FFFFFF' : '#A43C21');
+const LOGO = IS_PORTAL
+  ? require('@/assets/images/karavan-portal-logo.png')
+  : require('@/assets/images/karavan-icon.png');
 const LOGO_SIZE = 220;
 const DURATION = 1300;
 
@@ -59,7 +67,7 @@ export function AnimatedSplashOverlay() {
 
   if (!visible) return null;
 
-  const image = <Image style={styles.image} source={require('@/assets/images/karavan-icon.png')} />;
+  const image = <Image style={styles.image} source={LOGO} />;
 
   if (!animate) {
     // Identical to the native splash; once laid out, hide the native one and
