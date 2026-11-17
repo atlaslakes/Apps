@@ -49,6 +49,21 @@ function staysInWebView(hostname: string | null) {
   return isBusyBoysHost(hostname) || isSameFrameAuthHost(hostname);
 }
 
+// Make the site feel like an app: no pinch/double-tap zoom and no rubber-band /
+// stretch overscroll. Runs after each page load (like Android's onPageFinished)
+// and only affects pages inside this app, not busyboys.com in a real browser.
+const LOCK_ZOOM_AND_OVERSCROLL = `
+(function() {
+  var m = document.querySelector('meta[name=viewport]');
+  if (!m) { m = document.createElement('meta'); m.name = 'viewport'; document.head.appendChild(m); }
+  m.content = 'width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no';
+  var s = document.createElement('style');
+  s.textContent = 'html,body{overscroll-behavior:none;touch-action:pan-x pan-y;}';
+  document.head.appendChild(s);
+})();
+true;
+`;
+
 export default function HomeScreen() {
   const webViewRef = useRef<WebView>(null);
   const [loading, setLoading] = useState(true);
@@ -97,6 +112,12 @@ export default function HomeScreen() {
           setCanGoBack(navState.canGoBack);
         }}
         allowsBackForwardNavigationGestures
+        // Zoom off + no overscroll stretch/bounce (Android 12+ stretch, iOS bounce).
+        setBuiltInZoomControls={false}
+        setDisplayZoomControls={false}
+        overScrollMode="never"
+        bounces={false}
+        injectedJavaScript={LOCK_ZOOM_AND_OVERSCROLL}
         // Persist login cookies (busyboys.com + base44.app) across app launches.
         sharedCookiesEnabled
         thirdPartyCookiesEnabled
